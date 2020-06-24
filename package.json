@@ -1,0 +1,29 @@
+{
+  "name": "Plex13319",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brentgroves/Plex13319.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brentgroves/Plex13319/issues"
+  },
+  "homepage": "https://github.com/brentgroves/Plex13319#readme",
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "@bgroves/common": "^1.0.0",
+    "mqtt": "^4.1.0",
+    "soap": "^0.31.0"
+  }
+}
