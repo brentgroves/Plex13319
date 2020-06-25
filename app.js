@@ -38,7 +38,8 @@ async function getSetupContainers(TransDate, PCN, ProdServer, Workcenter, CNC) {
   soap.createClient(plexWSDL, function(err, client) {
     // we now have a soapClient - we also need to make sure there's no `err` here.
     if (err) {
-      return client.status(500).json(err);
+      common.log("caught exception!", err);
+      return;
     }
 
     client.setSecurity(BAS);
@@ -59,7 +60,8 @@ async function getSetupContainers(TransDate, PCN, ProdServer, Workcenter, CNC) {
     client.ExecuteDataSource(request_data, function(err, result) {
       // we now have a soapClient - we also need to make sure there's no `err` here.
       if (err) {
-        return result.status(500).json(err);
+        common.log("caught exception!", err);
+        return;
       }
 
       var res = result.ExecuteDataSourceResult.ResultSets.ResultSet[0].Rows.Row;
@@ -97,9 +99,9 @@ function main() {
   mqttClient = mqtt.connect(`mqtt://${MQTT_SERVER}`);
 
   mqttClient.on('connect', function() {
-    mqttClient.subscribe('Alarm13318-1', function(err) {
+    mqttClient.subscribe('Alarm13319-1', function(err) {
       if (!err) {
-        common.log('Plex13319 has subscribed to: Alarm13318-1');
+        common.log('Plex13319 has received: Alarm13319-1');
       }
     });
   });
