@@ -1,6 +1,7 @@
 // https://github.com/vpulim/node-soap
 const soap = require('soap');
 const mqtt = require('mqtt');
+const config = require('../Config13319/config.json');
 const common = require('@bgroves/common');
 
 var { MQTT_SERVER, PROD_WSDL, TEST_WSDL,ALBION_USER,ALBION_PASSWORD,AVILLA_USER,AVILLA_PASSWORD } = process.env;
@@ -101,21 +102,23 @@ function main() {
   mqttClient.on('connect', function() {
     mqttClient.subscribe('Alarm13319-1', function(err) {
       if (!err) {
-        common.log('Plex13319 has received: Alarm13319-1');
+        common.log('Plex13319 has subscribed to Alarm13319-1');
       }
     });
   });
-  // message is a buffer
-  // mqttClient.on('message', function(topic, message) {
-  //   const obj = JSON.parse(message.toString()); // payload is a buffer
-  //   for (let i = 0; i < config.NodeId.length; i++) {
-  //     let PCN = config.NodeId[i].PCN;
-  //     let WorkCenter = config.NodeId[i].WorkCenter;
-  //     let CNC = config.NodeId[i].CNC;
-  //     let TransDate = obj.TransDate;
-  //     getSetupContainers(TransDate, PCN, true, WorkCenter);
-  //     getSetupContainers(TransDate, PCN, false, WorkCenter);
-  //   }
-  // });
+  mqttClient.on('message', function(topic, message) {
+    const obj = JSON.parse(message.toString()); // payload is a buffer
+    common.log('Plex13319 has received: Alarm13319-1');
+    common.log(`Plex13319 message =>${message.toString()}`);
+    for (let i = 0; i < config.NodeId.length; i++) {
+      if(config.NodeId[i].WorkCenter_Key!='0'){
+        let TransDate = obj.TransDate;
+        let PCN = config.NodeId[i].PCN;
+        let WorkCenter_Key = config.NodeId[i].WorkCenter_Key;
+        // getSetupContainers(TransDate, PCN, true, WorkCenter_Key);
+        // getSetupContainers(TransDate, PCN, false, WorkCenter_Key);
+      }
+    }
+  });
 }
 main();
