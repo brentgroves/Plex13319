@@ -84,7 +84,7 @@ async function getSetupContainers(TransDate, PCN, ProdServer, Workcenter, CNC) {
 
         common.log(msgString);
 
-        mqttClient.publish('Plex13318', msgString);
+        mqttClient.publish('Plex13319', msgString);
         setupContainer = {};
       }
     });
@@ -93,8 +93,11 @@ async function getSetupContainers(TransDate, PCN, ProdServer, Workcenter, CNC) {
 
 function main() {
   //Test
-  var testDate = '2019-12-15 09:00'
-  getSetupContainers(testDate, 'Avilla', true, '61420','422');
+  var testDate = '2020-06-29 00:00'
+//  var testDate = '2019-12-15 09:00'
+  getSetupContainers(testDate, 'Avilla', true, '61324','103');
+  getSetupContainers(testDate, 'Avilla', false, '61318','360');
+  getSetupContainers(testDate, 'Avilla', true, '61314','362');
   getSetupContainers(testDate, 'Avilla', false, '61420','422');
 /*
   for (let i = 0; i < config.nodes.length; i++) {
@@ -122,11 +125,8 @@ function main() {
     common.log(`Plex13319 message =>${message.toString()}`);
     for (let i = 0; i < config.nodes.length; i++) {
       if(config.nodes[i].workcenter_Key!='0'){
-        let TransDate = obj.transDate;
-        let PCN = config.nodes[i].pcn;
-        let WorkCenter_Key = config.nodes[i].workcenter_Key;
-        getSetupContainers(TransDate, PCN, true, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
-        getSetupContainers(TransDate, PCN, false, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+        getSetupContainers(obj.transDate, config.nodes[i].pcn, true, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+        getSetupContainers(obj.transDate, config.nodes[i].pcn, false, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
       }
     }
   });
