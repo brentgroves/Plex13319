@@ -96,6 +96,16 @@ function main() {
   var testDate = '2019-12-15 09:00'
   getSetupContainers(testDate, 'Avilla', true, '61420','422');
   getSetupContainers(testDate, 'Avilla', false, '61420','422');
+/*
+  for (let i = 0; i < config.nodes.length; i++) {
+    if(config.nodes[i].workcenter_Key!='0'){
+      let PCN = config.nodes[i].pcn;
+      let WorkCenter_Key = config.nodes[i].workcenter_Key;
+      getSetupContainers(testDate, config.nodes[i].pcn, true, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+      getSetupContainers(testDate, config.nodes[i].pcn, false, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+    }
+  }
+*/
   common.log(`Plex 13319->MQTT_SERVER=${MQTT_SERVER}`);
   mqttClient = mqtt.connect(`mqtt://${MQTT_SERVER}`);
 
@@ -115,8 +125,8 @@ function main() {
         let TransDate = obj.transDate;
         let PCN = config.nodes[i].pcn;
         let WorkCenter_Key = config.nodes[i].workcenter_Key;
-        getSetupContainers(TransDate, PCN, true, WorkCenter_Key);
-        getSetupContainers(TransDate, PCN, false, WorkCenter_Key);
+        getSetupContainers(TransDate, PCN, true, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+        getSetupContainers(TransDate, PCN, false, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
       }
     }
   });
