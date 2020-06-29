@@ -24,11 +24,7 @@ var mqttClient;
 // GA FWD Knuckle/FWD BE 517
 // Plex Workcenter: 61420
 
-async function getSetupContainers(TransDate, PCN, ProdServer, Workcenter, CNC) {
-  let plexWSDL;
-  if (ProdServer) plexWSDL = PROD_WSDL;
-  else plexWSDL = TEST_WSDL;
-
+async workcenter_Code
   var BAS;
   if ('Albion' == PCN) {
     BAS = new soap.BasicAuthSecurity(ALBION_USER, ALBION_PASSWORD);
@@ -110,11 +106,11 @@ function main() {
     const obj = JSON.parse(message.toString()); // payload is a buffer
     common.log('Plex13319 has received: Alarm13319-1');
     common.log(`Plex13319 message =>${message.toString()}`);
-    for (let i = 0; i < config.NodeId.length; i++) {
-      if(config.NodeId[i].WorkCenter_Key!='0'){
+    for (let i = 0; i < config.nodes.length; i++) {
+      if(config.nodes[i].WorkCenter_Key!='0'){
         let TransDate = obj.TransDate;
-        let PCN = config.NodeId[i].PCN;
-        let WorkCenter_Key = config.NodeId[i].WorkCenter_Key;
+        let PCN = config.nodes[i].PCN;
+        let WorkCenter_Key = config.nodes[i].WorkCenter_Key;
         // getSetupContainers(TransDate, PCN, true, WorkCenter_Key);
         // getSetupContainers(TransDate, PCN, false, WorkCenter_Key);
       }
