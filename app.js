@@ -95,10 +95,10 @@ function main() {
   //Test
   var testDate = '2020-06-29 00:00'
 //  var testDate = '2019-12-15 09:00'
-  getSetupContainers(testDate, 'Avilla', true, '61324','103');
-  getSetupContainers(testDate, 'Avilla', false, '61318','360');
-  getSetupContainers(testDate, 'Avilla', true, '61314','362');
-  getSetupContainers(testDate, 'Avilla', false, '61420','422');
+  // getSetupContainers(testDate, 'Avilla', true, '61324','103');
+  // getSetupContainers(testDate, 'Avilla', false, '61318','360');
+  // getSetupContainers(testDate, 'Avilla', true, '61314','362');
+  // getSetupContainers(testDate, 'Avilla', false, '61420','422');
 /*
   for (let i = 0; i < config.nodes.length; i++) {
     if(config.nodes[i].workcenter_Key!='0'){
@@ -123,10 +123,11 @@ function main() {
     const obj = JSON.parse(message.toString()); // payload is a buffer
     common.log('Plex13319 has received: Alarm13319-1');
     common.log(`Plex13319 message =>${message.toString()}`);
+    //Plex13319 message =>{"TransDate":"2020-07-08 12:15"}
     for (let i = 0; i < config.nodes.length; i++) {
       if(config.nodes[i].workcenter_Key!='0'){
-        getSetupContainers(obj.transDate, config.nodes[i].pcn, true, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
-        getSetupContainers(obj.transDate, config.nodes[i].pcn, false, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+        getSetupContainers(obj.TransDate, config.nodes[i].pcn, true, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
+        getSetupContainers(obj.TransDate, config.nodes[i].pcn, false, config.nodes[i].workcenter_Key,config.nodes[i].cnc);
       }
     }
   });
